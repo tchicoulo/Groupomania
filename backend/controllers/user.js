@@ -10,8 +10,8 @@ exports.signup = (req, res, next) => {
 
     if (regexPasswordHard.test(req.body.password)){
        
-        db.query(`SELECT * FROM user WHERE email='${req.body.email}'`,
-            (err, results, rows) => {
+        const values = [req.body.email];
+        db.query('SELECT * FROM user WHERE email= ?', values, (err, results, rows) => {
                 //Si email déjà utilisé
                 if (results.length > 0) {
                     res.status(401).json({
@@ -23,7 +23,8 @@ exports.signup = (req, res, next) => {
                 bcrypt.hash(req.body.password, 10)
                 .then(hash => {
                     //Ajout à la BDD
-                    db.query(`INSERT INTO user VALUES (NULL, '${req.body.pseudo}', '${req.body.email}', '${hash}')`,
+                    const values = [req.body.pseudo, req.body.email, hash];
+                    db.query('INSERT INTO user VALUES (NULL, ?, ?, ?)', values,
                         (err, results, fields) => {
                             if (err) {
                                 console.log(err);
@@ -49,14 +50,14 @@ exports.signup = (req, res, next) => {
 // Login, connection
  exports.login = (req, res, next) => {
 
-    db.query(`SELECT * FROM user WHERE email='${req.body.email}'`, (error, results, fields) => {
-        
+    const values = [req.body.email];
+    db.query('SELECT * FROM user WHERE email= ?', values, (error, results, fields) => {
         // Si l'utilisateur existe
         if (results.length > 0) {
             bcrypt.compare(req.body.password, results[0].password)
                 .then( bcryptOk => {
                     if (!bcryptOk) {
-                        res.status(401).json({ message :  'Mot de passe incorrect !'})
+                        res.status(401).json({ message : 'Mot de passe incorrect !'})
                     } else {
                         res.status(201).json({
                             userId: results[0].userId,
@@ -78,7 +79,8 @@ exports.signup = (req, res, next) => {
 // Delete, Suppression utilisateur
 exports.delete = (req, res, next) => {
 
-    db.query(`DELETE FROM user WHERE user.id = '${req.params.id}'`, (error , results, fields) => {
+    const values = [req.params.id];
+    db.query('DELETE FROM user WHERE user.id = ?', values, (error , results, fields) => {
         if (error) {
             res.status(400).json({error})
         }
