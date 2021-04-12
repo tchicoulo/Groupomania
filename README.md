@@ -10,22 +10,53 @@ Authentifier un utilisateur et maintenir sa session
 
 Gérer un stockage de données à l'aide de SQL
 
+### Base de donnée
+
+Start your MySQL server
+
+Then import the database,
+you can find it from :
+
+```
+/backend/db_sql_backup/bdd_groupomania.sql
+```
+
 ### Back-end setup
 
+```
 cd backend
 
 ```
-then
-```
 
+then
 npm install
 
 ```
-then
-```
 
+then
 nodemon server
+```
 
 ### Front-end setup
 
-(Soon...)
+```
+cd frontend
+
+```
+
+Make sure to have Vue.cli
+
+npm install -g @vue/cli
+
+```
+
+then
+npm install
+```
+
+then
+
+```
+
+npm run serve
+```
