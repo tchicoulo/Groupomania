@@ -1,0 +1,56 @@
+<template>
+  <div class="home">
+    <HeaderHome />
+    <div class="content">
+      <div class="content content_text">
+        <h1>Bienvenue !</h1>
+        <h2>Veuillez vous inscrire ou vous connecter</h2>
+      </div>
+      <div class="content content-img">
+        <img src="@/images/icon-above-font.png" alt="Logo Groupomania" />
+      </div>
+    </div>
+    <Footer />
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import HeaderHome from "../components/HeaderHome";
+import Footer from "@/components/Footer";
+
+export default {
+  name: "Home",
+  components: {
+    HeaderHome,
+    Footer,
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+$color-red: rgb(209, 81, 90);
+$color-blue: rgb(9, 31, 67);
+$color-grey: rgb(214, 214, 214);
+
+h1,
+h2 {
+  color: $color-blue;
+  font-family: "Mukta", sans-serif;
+  text-align: center;
+}
+.content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.content_text {
+  margin-top: 50px;
+  height: 60%;
+  flex-direction: column;
+  align-items: flex-end;
+}
+img {
+  width: 65%;
+}
+</style>

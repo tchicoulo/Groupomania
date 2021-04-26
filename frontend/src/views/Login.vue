@@ -1,0 +1,41 @@
+<template>
+  <div class="Login">
+    <HeaderHome />
+    <h1>Connexion</h1>
+    <div class="content">
+      <LoginForm />
+    </div>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import HeaderHome from "@/components/HeaderHome";
+import LoginForm from "@/components/LoginForm";
+
+export default {
+  name: "Login",
+  components: {
+    HeaderHome,
+    LoginForm,
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+$color-blue: rgb(9, 31, 67);
+
+.content {
+  display: flex;
+  height: 600px;
+  background-image: url("../images/icon.png");
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+h1 {
+  font-family: "Mukta", sans-serif;
+  text-align: center;
+  color: $color-blue;
+}
+</style>

@@ -1,0 +1,41 @@
+<template>
+  <div class="Sign-up">
+    <HeaderHome />
+    <h1>Inscription</h1>
+    <div class="content">
+      <SignupForm submitClass="sub-sign-up" />
+    </div>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import HeaderHome from "@/components/HeaderHome";
+import SignupForm from "@/components/SignupForm";
+
+export default {
+  name: "Sign-up",
+  components: {
+    HeaderHome,
+    SignupForm,
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+$color-blue: rgb(9, 31, 67);
+
+.content {
+  height: 600px;
+  background-image: url("../images/icon.png");
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+  display: flex;
+}
+h1 {
+  font-family: "Mukta", sans-serif;
+  text-align: center;
+  color: $color-blue;
+}
+</style>

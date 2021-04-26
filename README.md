@@ -29,17 +29,20 @@ cd backend
 ```
 
 then
+
+```
 npm install
 
 ```
 
 then
+
+```
 nodemon server
 ```
 
 ### Front-end setup
 
-```
 cd frontend
 
 ```
@@ -51,7 +54,11 @@ npm install -g @vue/cli
 ```
 
 then
+
+```
+
 npm install
+
 ```
 
 then
@@ -59,4 +66,5 @@ then
 ```
 
 npm run serve
+
 ```
