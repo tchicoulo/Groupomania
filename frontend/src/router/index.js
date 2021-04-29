@@ -39,6 +39,16 @@ const routes = [
     path: '/newpost',
     name: 'NewPost',
     component: () => import('../views/NewPost')
+  },
+  {
+    path: '/deleteuser',
+    name: 'DeleteUser',
+    component: () => import('../views/DeleteUser')
+  },
+  {
+    path: '/post/:id',
+    name: 'PostId',
+    component: () => import("../views/PostId")
   }
 ]
 

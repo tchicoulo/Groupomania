@@ -23,8 +23,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color-blue: rgb(9, 31, 67);
-
 .content {
   display: flex;
   height: 600px;
@@ -34,8 +32,7 @@ $color-blue: rgb(9, 31, 67);
   background-repeat: no-repeat;
 }
 h1 {
-  font-family: "Mukta", sans-serif;
   text-align: center;
-  color: $color-blue;
+  color: var(--color-blue);
 }
 </style>

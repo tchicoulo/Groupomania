@@ -9,10 +9,10 @@
       /></router-link>
     </div>
     <nav>
-      <router-link v-if="!isConnected()" to="/about">À propos</router-link> |
-      <router-link v-if="!isConnected()" to="/sign-up">S'inscrire</router-link>|
-      <router-link v-if="!isConnected()" to="/login">Se connecter</router-link>|
-      <router-link v-if="isConnected()" to="/profile">Mon profil</router-link> |
+      <router-link v-if="!isConnected()" to="/about">À propos</router-link>
+      <router-link v-if="!isConnected()" to="/sign-up">S'inscrire</router-link>
+      <router-link v-if="!isConnected()" to="/login">Se connecter</router-link>
+      <router-link v-if="isConnected()" to="/profile">Mon profil</router-link>
       <button v-if="isConnected()" @click="disconnect()">
         Se déconnecter
       </button>
@@ -47,20 +47,13 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Mukta&display=swap");
-
-$color-red: rgb(209, 81, 90);
-$color-blue: rgb(9, 31, 67);
-$color-grey: rgb(214, 214, 214);
-
+<style lang="scss" scoped>
 header {
-  font-family: "Mukta", sans-serif;
-  background-color: $color-blue;
-  border-bottom: 7px solid $color-red;
-  border-radius: 5%;
+  background-color: var(--color-blue);
+  border-bottom: 7px solid var(--color-red);
+  border-radius: 0 0 5% 5%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 150px;
@@ -68,26 +61,37 @@ header {
 }
 
 .btn-logo {
-  width: 30%;
+  width: 40%;
   &:hover {
     transform: scale(1.05);
     transition-duration: 0.2s;
   }
 }
 
-nav {
-  padding: 30px;
+.left-part {
+  width: 40%;
+}
 
+img {
+  padding-left: 35px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 30px;
+  width: 20%;
   a {
     font-weight: bold;
-    color: $color-grey;
+    color: var(--color-grey);
     font-size: 18px;
     text-decoration: none;
 
     &.router-link-exact-active {
-      color: $color-red;
+      color: var(--color-red);
       text-shadow: 3px 10px 25px white, 0px 1px 1px black;
-      border-bottom: 1px solid $color-grey;
+      border-bottom: 1px solid var(--color-grey);
     }
   }
 }

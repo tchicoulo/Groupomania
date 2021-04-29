@@ -4,7 +4,7 @@ const db =  require('../db_connect');
 exports.getPosts = (req, res, next) => {
     db.query('SELECT user.id, user.pseudo, post.id, post.titre, post.description, post.date AS date, post.id_user FROM user INNER JOIN post ON user.id = post.id_user ORDER BY date DESC', (error, results, fields) => {
         if (error) {
-            res.status(400).json({error})
+            res.status(400).json({lol})
         } 
         res.status(200).json(results);
     })

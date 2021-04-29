@@ -60,7 +60,8 @@ exports.signup = (req, res, next) => {
                         res.status(401).json({ message : 'Mot de passe incorrect !'})
                     } else {
                         res.status(201).json({
-                            userId: results[0].userId,
+                            userId: results[0].id,
+                            pseudo: results[0].pseudo,
                             token: jwt.sign(
                                 {userId: results[0].id},
                                 process.env.TOKEN,

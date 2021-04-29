@@ -1,55 +1,71 @@
 <template>
   <div class="newpost">
     <HeaderHome />
-    <h1>Nouveau post !</h1>
 
+    <h1>Nouveau post !</h1>
     <form action="" method="post" @submit.prevent="submitPost()">
-      <div class="form-row">
-        <label for="title">Titre</label><br />
-        <input type="text" name="title" id="title" required />
-      </div>
-      <div class="form-row">
-        <label for="description">Description</label><br />
-        <input type="select" name="description" id="description" required />
-        <div class="message-post">{{ message }}</div>
-      </div>
-      <input class="btn-send" type="submit" value="Envoyer" />
+      <PostForm
+        :messagePost="message"
+        submitValue="Créer"
+        idTitle="title"
+        idDescription="description"
+      />
     </form>
   </div>
 </template>
 
 <script>
 import HeaderHome from "@/components/HeaderHome";
+import PostForm from "@/components/PostForm";
+import axios from "axios";
 
 export default {
   name: "NewPosts",
   components: {
     HeaderHome,
+    PostForm,
   },
   data() {
     return {
-      message: "", ////////////
+      message: "",
     };
   },
   methods: {
     submitPost() {
-      // A REMPLIRRRRRRRRR
+      let titre = document.getElementById("title").value;
+      let description = document.getElementById("description").value;
+      let token = JSON.parse(localStorage.getItem("user")).token;
+      let id_user = JSON.parse(localStorage.getItem("user")).userId;
+
+      axios
+        .post(
+          "http://localhost:3000/api/posts",
+          { titre, description, id_user },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          this.message = "Votre post à bien été créé";
+          setTimeout(function() {
+            window.location = "/posts";
+          }, 1500);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-$color-red: rgb(209, 81, 90);
-$color-blue: rgb(9, 31, 67);
-$color-grey: rgb(214, 214, 214);
-
 form {
-  background-color: $color-grey;
-  font-family: "Mukta", sans-serif;
+  background-color: var(--color-grey);
   border-radius: 5%;
   margin: auto;
-  color: $color-blue;
+  color: var(--color-blue);
   display: flex;
   width: 25%;
   height: 350px;
@@ -58,38 +74,5 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  & .form-row {
-    text-align: center;
-    margin: 10px;
-    width: 70%;
-    color: $color-blue;
-  }
-}
-input {
-  font-size: 15px;
-  font-weight: bold;
-  width: 80%;
-  height: 30%;
-  border-radius: 10%;
-}
-
-#description {
-  height: 100%;
-}
-
-.btn-send {
-  width: 20%;
-  height: 10%;
-  font-family: "Mukta", sans-serif;
-  font-size: 17px;
-  font-weight: bold;
-  color: $color-blue;
-  &:hover {
-    color: white;
-    background-color: $color-blue;
-  }
-  &:focus {
-    background-color: $color-red;
-  }
 }
 </style>

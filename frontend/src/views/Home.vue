@@ -29,14 +29,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color-red: rgb(209, 81, 90);
-$color-blue: rgb(9, 31, 67);
-$color-grey: rgb(214, 214, 214);
-
 h1,
 h2 {
-  color: $color-blue;
-  font-family: "Mukta", sans-serif;
+  color: var(--color-blue);
   text-align: center;
 }
 .content {

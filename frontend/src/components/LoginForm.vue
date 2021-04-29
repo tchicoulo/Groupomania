@@ -51,7 +51,9 @@ export default {
           this.messagePass = "";
           this.messageValid = "Compte validé !";
           localStorage.setItem("user", JSON.stringify(response.data));
-          window.location = "/posts";
+          setTimeout(function() {
+            window.location = "/posts";
+          }, 1500);
         })
         .catch((err) => {
           if (err.response.status === 401) {
@@ -68,17 +70,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color-red: rgb(209, 81, 90);
-$color-blue: rgb(9, 31, 67);
-$color-grey: rgb(214, 214, 214);
-
 form {
-  background-color: $color-grey;
-  font-family: "Mukta", sans-serif;
-  border: 2px solid $color-red;
+  background-color: var(--color-grey);
+  border: 2px solid var(--color-red);
   border-radius: 10%;
   margin: auto;
-  color: $color-blue;
+  color: var(--color-blue);
   display: flex;
   width: 25%;
   height: 350px;
@@ -91,7 +88,7 @@ form {
     text-align: center;
     margin: 10px;
     width: 70%;
-    color: $color-blue;
+    color: var(--color-blue);
   }
 }
 input {
@@ -117,16 +114,15 @@ input {
 .btn-send {
   width: 20%;
   height: 10%;
-  font-family: "Mukta", sans-serif;
   font-size: 17px;
   font-weight: bold;
-  color: $color-blue;
+  color: var(--color-blue);
   &:hover {
     color: white;
-    background-color: $color-blue;
+    background-color: var(--color-blue);
   }
   &:focus {
-    background-color: $color-red;
+    background-color: var(--color-red);
   }
 }
 

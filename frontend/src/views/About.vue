@@ -23,31 +23,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color-blue: rgb(9, 31, 67);
-$color-grey: rgb(214, 214, 214);
-
 h1,
 p {
-  font-family: "Mukta", sans-serif;
   text-align: center;
-  color: $color-blue;
-  background-color: $color-grey;
 
   margin: 0 auto;
 }
 
 h1 {
+  text-shadow: 1px 2px var(--color-grey);
   margin-top: 150px;
+  margin-bottom: 120px;
   width: 20%;
-  box-shadow: 1px 5px 5px $color-blue;
   border-radius: 15%;
+  border-bottom: 2px solid black;
 }
 
 p {
+  background-color: var(--color-grey);
   margin-top: 80px;
   font-size: 18px;
   width: 50%;
   padding: 50px;
-  box-shadow: 1px 5px 5px $color-blue;
+  box-shadow: 1px 5px 5px var(--color-blue);
 }
 </style>
