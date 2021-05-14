@@ -24,7 +24,7 @@ exports.signup = (req, res, next) => {
                 .then(hash => {
                     //Ajout à la BDD
                     const values = [req.body.pseudo, req.body.email, hash];
-                    db.query('INSERT INTO user VALUES (NULL, ?, ?, ?)', values,
+                    db.query('INSERT INTO user VALUES (NULL, ?, ?, ?, 0)', values,
                         (err, results, fields) => {
                             if (err) {
                                 console.log(err);
@@ -62,6 +62,7 @@ exports.signup = (req, res, next) => {
                         res.status(201).json({
                             userId: results[0].id,
                             pseudo: results[0].pseudo,
+                            admin: results[0].admin,
                             token: jwt.sign(
                                 {userId: results[0].id},
                                 process.env.TOKEN,
@@ -78,13 +79,24 @@ exports.signup = (req, res, next) => {
  };
  
 // Delete, Suppression utilisateur
-exports.delete = (req, res, next) => {
+exports.deleteUser = (req, res, next) => {
 
     const values = [req.params.id];
-    db.query('DELETE FROM user WHERE user.id = ?', values, (error , results, fields) => {
+    db.query('DELETE FROM user WHERE user.id = ?', values, 
+    (error , results, fields) => {
+        if (error) {
+            return res.status(400).json({error})
+        }
+        return res.status(200).json(results);
+    })
+}
+
+// Tous les utilisateurs
+exports.getUsers = (req, res, next) => {
+    db.query('SELECT * FROM user', (error, results, fields) => {
         if (error) {
             res.status(400).json({error})
         }
-        res.status(200).json({ message: `L\'utilisateur à bien été supprimé !`})
+        res.status(200).json({results})
     })
 }

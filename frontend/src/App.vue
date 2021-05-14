@@ -10,7 +10,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--color-blue);
 }
 
 body {
@@ -22,14 +22,5 @@ body {
   --color-red: rgb(209, 81, 90);
   --color-blue: rgb(9, 31, 67);
   --color-grey: rgb(214, 214, 214);
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
 }
 </style>

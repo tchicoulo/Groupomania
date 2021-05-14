@@ -13,23 +13,13 @@ exports.getComments = (req, res, next) => {
 
 //Création d'un commentaire
 exports.createComment = (req, res, next) => {
-    const values = [req.body.description, req.params.id, req.body.id_user];
+
+    const values = [req.body.description, parseInt(req.params.id), req.body.userId];
     db.query('INSERT INTO commentaire VALUES (NULL, NOW(), ?, ?, ?)', values, (error, results, fields) => {
         if (error) {
-            res.status(400).json({error})
+            return res.status(400).json({error})
         }
-        res.status(201).json({ "comment": {"href": `http://localhost:3000/api/posts/${req.params.id}/comments`}})
-    })
-}
-
-//Modification d'un commentaire
-exports.modifyComment = (req, res, next) => {
-    const values = [req.body.description, req.params.id];
-    db.query('UPDATE commentaire SET description_com = ? WHERE commentaire.id = ?', values, (error, results, fields) =>  {
-        if (error) {
-            res.status(400).json({error})
-        }
-        res.status(200).json({ message: 'Votre commentaire à été modifié ! '})
+        return res.status(201).json({ "comment": {"href": `http://localhost:3000/api/posts/${req.params.id}/comments`}})
     })
 }
 

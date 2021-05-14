@@ -15,7 +15,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import HeaderHome from "../components/HeaderHome";
 import Footer from "@/components/Footer";
 
@@ -47,5 +46,11 @@ h2 {
 }
 img {
   width: 65%;
+}
+@media (max-width: 768px) {
+  h1,
+  h2 {
+    display: none;
+  }
 }
 </style>

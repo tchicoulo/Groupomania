@@ -1,14 +1,16 @@
 <template>
-  <div class="newpost">
+  <div class="ModifyPost">
     <HeaderHome />
 
-    <h1>Nouveau Post !</h1>
-    <form action="" method="post" @submit.prevent="submitPost()">
+    <h1>Souhaitez-vous modifier votre Post ?</h1>
+    <form action="" method="post" @submit.prevent="modifyPost()">
       <PostForm
         :messagePost="message"
-        submitValue="Créer"
+        submitValue="Modifier"
         classTitle="title"
         idDescription="description"
+        :titleValue="title"
+        :valueDescription="description"
       />
     </form>
   </div>
@@ -28,31 +30,35 @@ export default {
   data() {
     return {
       message: "",
+      title: localStorage.getItem("dataInfoTitle"),
+      description: localStorage.getItem("dataInfoDescription"),
     };
   },
   methods: {
-    submitPost() {
+    modifyPost() {
       let titre = document.getElementById("title").value;
       let description = document.getElementById("description").value;
       let token = JSON.parse(localStorage.getItem("user")).token;
-      let id_user = JSON.parse(localStorage.getItem("user")).userId;
+      let postId = localStorage.getItem("idPost");
 
       axios
-        .post(
-          "http://localhost:3000/api/posts",
-          { titre, description, id_user },
+        .put(
+          `http://localhost:3000/api/posts/${postId}`,
+          { titre, description, postId },
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         )
         .then(() => {
-          this.message = "Votre post à bien été créé";
+          this.title = "";
+          this.description = "";
+          this.message = "Votre post à bien été modifié";
           setTimeout(function() {
             window.location = "/posts";
           }, 1500);
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch((error) => {
+          console.log(error);
         });
     },
   },
@@ -63,10 +69,10 @@ export default {
 form {
   background-color: var(--color-grey);
   border-radius: 5%;
-  margin: 0 auto;
+  margin: 50px auto;
   color: var(--color-blue);
   display: flex;
-  width: 60%;
+  width: 40%;
   font-size: 18px;
   font-weight: bold;
   flex-direction: column;
@@ -80,7 +86,6 @@ h1 {
 @media (max-width: 1024px) {
   form {
     min-width: 280px;
-    margin-bottom: 30px;
   }
 }
 </style>

@@ -49,6 +49,11 @@ const routes = [
     path: '/post/:id',
     name: 'PostId',
     component: () => import("../views/PostId")
+  },
+  {
+    path: '/modifypost',
+    name: 'ModifyPost',
+    component: () => import("../views/ModifyPost")
   }
 ]
 

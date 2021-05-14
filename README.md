@@ -25,14 +25,12 @@ you can find it from :
 
 ```
 cd backend
-
 ```
 
 then
 
 ```
 npm install
-
 ```
 
 then
@@ -43,28 +41,38 @@ nodemon server
 
 ### Front-end setup
 
+```
+
 cd frontend
 
 ```
 
 Make sure to have Vue.cli
 
+```
 npm install -g @vue/cli
-
 ```
 
 then
 
 ```
-
 npm install
-
 ```
 
 then
 
 ```
-
 npm run serve
+```
 
+### Admin account
+
+For admin user, you need to enter the following informations below on the connection page :
+
+```
+Email:
+admin@admin.fr
+
+Password:
+Admin123456
 ```

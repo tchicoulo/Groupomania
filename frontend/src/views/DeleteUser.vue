@@ -7,8 +7,9 @@
         Confirmer
       </button>
       <router-link class="btn btn__no" to="/posts">Annuler</router-link>
-      <div class="message-confirm">{{ message }}</div>
     </div>
+    <br />
+    <div class="message-confirm">{{ message }}</div>
   </div>
 </template>
 
@@ -27,19 +28,18 @@ export default {
     };
   },
   methods: {
+    //Supprimer l'utilisateur
     DeleteUser() {
-      const userStorage = localStorage.getItem("user");
-      const userParsed = JSON.parse(userStorage);
-      const userId = userParsed.userId;
-      const token = userParsed.token;
+      const userId = JSON.parse(localStorage.getItem("user")).userId;
+      const token = JSON.parse(localStorage.getItem("user")).token;
 
       axios
         .delete(`http://localhost:3000/api/users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then(() => {
-          this.message = "Votre compte à bien été supprimé";
-          localStorage.removeItem("user");
+          this.message = "Compte supprimé !";
+          localStorage.clear();
           setTimeout(function() {
             window.location = "/";
           }, 1500);
@@ -81,5 +81,9 @@ h1 {
   &__no:hover {
     background-color: var(--color-red);
   }
+}
+
+.message-confirm {
+  color: red;
 }
 </style>

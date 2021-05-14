@@ -42,9 +42,16 @@ h1 {
 p {
   background-color: var(--color-grey);
   margin-top: 80px;
+  margin-bottom: 30px;
   font-size: 18px;
   width: 50%;
   padding: 50px;
   box-shadow: 1px 5px 5px var(--color-blue);
+}
+
+@media (max-width: 425px) {
+  h1 {
+    border-bottom: none;
+  }
 }
 </style>

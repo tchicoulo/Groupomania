@@ -32,6 +32,7 @@ export default {
   },
 
   methods: {
+    //Envoyer l'inscription
     submitSignIn() {
       let pseudo = document.getElementById("pseudo").value;
       let email = document.getElementById("email").value;
@@ -51,7 +52,6 @@ export default {
               window.location = "/";
             }, 1500);
           }
-          console.log(response);
         })
         .catch((err) => {
           console.log(err);
@@ -67,6 +67,7 @@ export default {
 form {
   background-color: var(--color-grey);
   border: 2px solid var(--color-red);
+  min-width: 250px;
   border-radius: 10%;
   margin: auto;
   color: var(--color-blue);
@@ -89,8 +90,8 @@ input {
   font-size: 15px;
   font-weight: bold;
   width: 60%;
-  height: 35%;
-  border-radius: 10%;
+  height: 50%;
+  border-radius: 5px;
 }
 .verif {
   margin: 10px 0;
@@ -106,9 +107,11 @@ input {
 }
 
 .btn-send {
-  width: 20%;
+  margin-top: 20px;
+  min-width: 20px;
+  max-width: 100px;
   height: 10%;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: bold;
   color: var(--color-blue);
   &:hover {

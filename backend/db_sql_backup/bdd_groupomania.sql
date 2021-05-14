@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 07, 2021 at 01:54 PM
+-- Generation Time: May 14, 2021 at 02:39 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `commentaire` (
   `id` int(10) NOT NULL,
-  `date_com` date DEFAULT NULL,
+  `date_com` datetime DEFAULT CURRENT_TIMESTAMP,
   `description_com` text NOT NULL,
   `id_post` int(10) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -41,11 +41,7 @@ CREATE TABLE `commentaire` (
 --
 
 INSERT INTO `commentaire` (`id`, `date_com`, `description_com`, `id_post`, `id_user`) VALUES
-(5, '2021-04-06', 'Ceci est un super commentaire', 4, 2),
-(6, '2021-04-06', 'Voici mon commentaire modifié, une seconde fois', 4, 2),
-(7, '2021-04-07', 'Commentaire modifié', 5, 2),
-(8, '2021-04-07', 'Quelle superbe description !!', 5, 2),
-(10, '2021-04-07', 'C\'est super comme commentaire !', 5, 2);
+(73, '2021-05-14 11:27:05', 'Voici un commentaire !', 12, 26);
 
 -- --------------------------------------------------------
 
@@ -66,9 +62,7 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `titre`, `description`, `date`, `id_user`) VALUES
-(3, 'Test', 'Mon superpost test modifié !', '2021-04-06 15:23:06', 2),
-(4, 'Mon post qui déchire', 'et sa super description', '2021-04-06 16:03:45', 2),
-(5, 'Bonjour les copains', 'Quelle superbe description !!', '2021-04-07 10:24:27', 2);
+(12, 'Second post ', 'Super', '2021-05-14 11:01:06', 26);
 
 -- --------------------------------------------------------
 
@@ -80,17 +74,18 @@ CREATE TABLE `user` (
   `id` int(10) NOT NULL,
   `pseudo` varchar(40) NOT NULL,
   `email` varchar(80) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `admin` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `pseudo`, `email`, `password`) VALUES
-(1, 'Steve', 'stv@hotmail.fr', '$2b$10$PzcRgiWmufEEQ.ZygCQx7OJZTM6K57wHvlSl5TZ9mN/5gMYUbuixy'),
-(2, 'Steven', 'steven@hotmail.fr', '$2b$10$ri6h95juJgjloDaBGvADs.QkuC8Rvp7VZfZimPSPhUOSw2p1NOSNK'),
-(5, 'Stevenalement', 'stevenalement@hotmail.fr', '$2b$10$2WwPNz8bgjDcGoXt5LijwetD86BWHWD0LnF.Qfp0UiqztGa1PG/zO');
+INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `admin`) VALUES
+(26, 'admin', 'admin@admin.fr', '$2b$10$7wepeI33cT14yOjzS36caeLJkRJ5ClWwY7XZrtYN6g6v9DLR9qjfC', 1),
+(30, 'Hola', 'hola@hola.fr', '$2b$10$931Oezb/XCAV9PLUzjAO2.ObUaRzlQ.XQ8LTknY.7BOnDbK8aa9wS', 0),
+(32, 'test', 'test@test.fr', '$2b$10$L6LOuW.lvW6nNfbY/DlpvOSJuLk86Lbfps3E3ZUQh7WmZ4kPJ0DDO', 0);
 
 --
 -- Indexes for dumped tables
@@ -101,15 +96,15 @@ INSERT INTO `user` (`id`, `pseudo`, `email`, `password`) VALUES
 --
 ALTER TABLE `commentaire`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_post_com` (`id_post`),
-  ADD KEY `FK_user_com` (`id_user`);
+  ADD KEY `fk_post_id_com` (`id_post`),
+  ADD KEY `fk_id_user_com` (`id_user`);
 
 --
 -- Indexes for table `post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_id_user` (`id_user`);
+  ADD KEY `fk_post_user_id` (`id_user`);
 
 --
 -- Indexes for table `user`
@@ -125,19 +120,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
@@ -147,14 +142,14 @@ ALTER TABLE `user`
 -- Constraints for table `commentaire`
 --
 ALTER TABLE `commentaire`
-  ADD CONSTRAINT `FK_post_com` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_user_com` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `fk_id_user_com` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_post_id_com` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `post`
 --
 ALTER TABLE `post`
-  ADD CONSTRAINT `FK_id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `fk_post_user_id` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

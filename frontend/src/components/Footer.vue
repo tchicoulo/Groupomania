@@ -22,9 +22,9 @@ footer {
   margin-top: 5px;
 }
 small {
-  color: white;
+  color: rgb(58, 58, 58);
   font-size: 20px;
   padding: 15px 25px 0 0;
-  text-shadow: 2px 2px 2px var(--color-blue);
+  text-shadow: 2px 2px 2px white;
 }
 </style>

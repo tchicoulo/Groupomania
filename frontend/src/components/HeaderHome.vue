@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="left-part">
-      <router-link @click="isConnected()" :to="route">
+      <router-link aria-label="Home button" @click="isConnected()" :to="route">
         <img
           class="btn-logo"
           src="../images/icon-left-font-monochrome-white.png"
@@ -10,12 +10,12 @@
     </div>
     <nav>
       <router-link v-if="!isConnected()" to="/about">À propos</router-link>
-      <router-link v-if="!isConnected()" to="/sign-up">S'inscrire</router-link>
-      <router-link v-if="!isConnected()" to="/login">Se connecter</router-link>
+      <router-link v-if="!isConnected()" to="/sign-up">Inscription</router-link>
+      <router-link v-if="!isConnected()" to="/login">Connexion</router-link>
       <router-link v-if="isConnected()" to="/profile">Mon profil</router-link>
-      <button v-if="isConnected()" @click="disconnect()">
-        Se déconnecter
-      </button>
+      <div class="btn-deco" v-if="isConnected()" @click="disconnect()">
+        Déconnexion
+      </div>
     </nav>
   </header>
 </template>
@@ -26,10 +26,11 @@ export default {
   data() {
     return {
       redirectionHome: Boolean,
-      route: String,
+      route: [String, null],
     };
   },
   methods: {
+    // utilisateur identifié/connecté ou non
     isConnected() {
       if (localStorage.getItem("user") == (null || undefined)) {
         this.route = "/";
@@ -40,7 +41,7 @@ export default {
       }
     },
     disconnect() {
-      localStorage.removeItem("user");
+      localStorage.clear();
       window.location = "/";
     },
   },
@@ -61,10 +62,21 @@ header {
 }
 
 .btn-logo {
-  width: 40%;
+  width: 45%;
   &:hover {
     transform: scale(1.05);
     transition-duration: 0.2s;
+  }
+}
+
+.btn-deco {
+  width: 60%;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  &:hover {
+    color: var(--color-red);
+    text-shadow: 3px 10px 25px white, 0px 1px 1px black;
   }
 }
 
@@ -80,19 +92,35 @@ nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding: 30px;
-  width: 20%;
+  align-items: center;
+  text-align: center;
+  padding: 15px 15px;
+  width: 40%;
   a {
     font-weight: bold;
     color: var(--color-grey);
     font-size: 18px;
     text-decoration: none;
+    margin: 5px;
 
     &.router-link-exact-active {
-      color: var(--color-red);
+      color: white;
       text-shadow: 3px 10px 25px white, 0px 1px 1px black;
       border-bottom: 1px solid var(--color-grey);
     }
+  }
+}
+@media (max-width: 1024px) {
+  .btn-logo {
+    min-width: 150px;
+  }
+  nav {
+    flex-direction: column;
+  }
+}
+@media (max-width: 375px) {
+  .btn-deco {
+    font-size: 15px;
   }
 }
 </style>
