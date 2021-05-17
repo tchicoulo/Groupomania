@@ -37,6 +37,7 @@ export default {
     };
   },
   created: function() {
+    //afficher tous les posts
     let token = JSON.parse(localStorage.getItem("user")).token;
 
     axios

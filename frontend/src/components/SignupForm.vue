@@ -32,7 +32,7 @@ export default {
   },
 
   methods: {
-    //Envoyer l'inscription
+    //Inscription
     submitSignIn() {
       let pseudo = document.getElementById("pseudo").value;
       let email = document.getElementById("email").value;

@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import HeaderHome from "@/components/HeaderHome";
 import SignupForm from "@/components/SignupForm";
 

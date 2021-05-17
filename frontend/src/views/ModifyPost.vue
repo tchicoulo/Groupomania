@@ -35,6 +35,7 @@ export default {
     };
   },
   methods: {
+    //Modifier post
     modifyPost() {
       let titre = document.getElementById("title").value;
       let description = document.getElementById("description").value;

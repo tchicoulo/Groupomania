@@ -31,6 +31,7 @@ export default {
     };
   },
   methods: {
+    //Envoi du post
     submitPost() {
       let titre = document.getElementById("title").value;
       let description = document.getElementById("description").value;

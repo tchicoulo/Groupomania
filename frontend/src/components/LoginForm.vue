@@ -29,7 +29,7 @@ export default {
     };
   },
   methods: {
-    // voir le mot de passe
+    //Voir le mot de passe
     showPass() {
       let showPass = document.getElementById("password");
       if (showPass.type === "password") {
@@ -38,6 +38,7 @@ export default {
         showPass.type = "password";
       }
     },
+    //Connexion
     submitLogIn() {
       let email = document.getElementById("email").value;
       let password = document.getElementById("password").value;
