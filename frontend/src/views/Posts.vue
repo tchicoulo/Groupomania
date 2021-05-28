@@ -13,7 +13,7 @@
       >
         <h1>{{ post.titre }}</h1>
         <h2>Posté par: {{ post.pseudo }}</h2>
-        <h3>Le : {{ formatDate(post.date) }}</h3>
+        <h3>{{ formatDate(post.date) }}</h3>
       </router-link>
     </div>
     <Footer />
@@ -24,6 +24,7 @@
 import HeaderHome from "@/components/HeaderHome";
 import Footer from "@/components/Footer";
 import axios from "axios";
+import moment from "moment";
 
 export default {
   name: "Posts",
@@ -51,17 +52,8 @@ export default {
   },
   methods: {
     formatDate(date) {
-      const event = new Date(date);
-
-      const options = {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-      };
-      return event.toLocaleDateString(undefined, options);
+      moment.locale("fr");
+      return moment(date).fromNow();
     },
   },
 };

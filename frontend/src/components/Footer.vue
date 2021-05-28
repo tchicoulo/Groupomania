@@ -20,6 +20,8 @@ footer {
   display: flex;
   justify-content: flex-end;
   margin-top: 5px;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 small {
   color: rgb(58, 58, 58);

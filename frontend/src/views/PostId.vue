@@ -38,13 +38,7 @@
 
       <h4>{{ comment.description_com }}</h4>
       <h5 class="date">
-        Le:
-        {{
-          comment.date_com
-            .split("T")
-            .join(" à ")
-            .split(".000Z")[0]
-        }}
+        {{ formatDate(comment.date_com) }}
       </h5>
       <div
         v-if="comment.pseudo == userPseudo || admin == 1"
@@ -61,6 +55,7 @@
 import HeaderHome from "@/components/HeaderHome";
 import CommentPost from "@/components/CommentPost";
 import axios from "axios";
+import moment from "moment";
 
 export default {
   name: "PostId",
@@ -134,6 +129,13 @@ export default {
         .catch((err) => {
           console.log(err.response);
         });
+    },
+
+    // Date formaté avece moment.js
+
+    formatDate(date) {
+      moment.locale("fr");
+      return moment(date).fromNow();
     },
 
     //Ouvrir la fenetre pour rédiger un commntaire
